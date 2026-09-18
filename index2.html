@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Лика — генерация картинки, точка катается (2a)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --slot:#f2f1ef; --dot:rgba(23,33,31,.11);
+    --status:#a8b0ae; --page:#ffffff;
+  }
+  [data-theme="dark"]{
+    --slot:#2f2f2c; --dot:rgba(255,255,255,.10);
+    --status:#6f7877; --page:#262626;
+  }
+  html,body{margin:0}
+  body{background:var(--page);font-family:Onest,system-ui,sans-serif;padding:40px;display:flex;justify-content:center}
+
+  .lk-generating{display:flex;flex-direction:column;gap:18px}
+  .lk-status{display:flex;align-items:center;gap:9px;font-size:15px;color:var(--status)}
+  .lk-status i{width:4px;height:4px;border-radius:50%;background:currentColor;animation:lk-dots 1.8s ease-in-out infinite}
+  .lk-status i:nth-child(2){animation-delay:.25s}
+  .lk-status i:nth-child(3){animation-delay:.5s}
+
+  .lk-slot{position:relative;width:320px;height:320px;border-radius:40px;overflow:hidden;
+    background-color:var(--slot);
+    background-image:radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size:18px 18px;background-position:9px 9px}
+
+  .lk-roll{position:absolute;left:36px;bottom:44px;width:52px;height:52px;
+    animation:lk-roll 4.6s cubic-bezier(.45,.05,.55,.95) infinite alternate}
+  .lk-ball{width:52px;height:52px;
+    background:radial-gradient(circle at 34% 28%, rgba(255,255,255,.84), transparent 20%), linear-gradient(145deg,#68e0cd,#19bfa7);
+    box-shadow:inset -4px -6px 12px rgba(0,119,103,.16), 0 0 0 9px rgba(25,191,167,.08);
+    animation:lk-dough 1.15s cubic-bezier(.55,.05,.28,1) infinite}
+  .lk-contact{position:absolute;left:0;bottom:-12px;width:52px;height:10px;border-radius:50%;
+    background:radial-gradient(ellipse at center, rgba(0,119,103,.45), transparent 70%);
+    animation:lk-contact 1.15s cubic-bezier(.55,.05,.28,1) infinite}
+
+  @keyframes lk-roll{0%{transform:translateX(0)}100%{transform:translateX(216px)}}
+  @keyframes lk-dough{
+    0%,100%{transform:translateY(-7px) scaleX(.93) scaleY(1.06);border-radius:50% 50% 48% 52% / 52% 52% 48% 48%}
+    20%{transform:translateY(-3px) scaleX(1.03) scaleY(.96);border-radius:49% 51% 48% 52% / 51% 49% 51% 49%}
+    52%{transform:translateY(6px) scaleX(1.54) scaleY(.62);border-radius:45% 55% 48% 52% / 58% 58% 42% 42%}
+    72%{transform:translateY(2px) scaleX(1.22) scaleY(.8);border-radius:48% 52% 47% 53% / 54% 54% 46% 46%}
+  }
+  @keyframes lk-contact{0%,100%{transform:scaleX(.62);opacity:.14}52%{transform:scaleX(1.2);opacity:.30}}
+  @keyframes lk-dots{0%,100%{opacity:.25}50%{opacity:.9}}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+  <!-- data-theme="dark" на любом родителе переключает на тёмную тему (#262626) -->
+  <div class="lk-generating">
+    <div class="lk-status">Выполняю<i></i><i></i><i></i></div>
+    <div class="lk-slot">
+      <div class="lk-roll">
+        <div class="lk-contact"></div>
+        <div class="lk-ball"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
