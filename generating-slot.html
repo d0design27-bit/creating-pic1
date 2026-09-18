@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Лика — слот генерации картинки (1b)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --slot:#f2f1ef; --dot:rgba(23,33,31,.11); --block:rgba(23,33,31,.055);
+    --mint:rgba(25,191,167,.20); --status:#a8b0ae;
+    --page:#ffffff;
+  }
+  [data-theme="dark"]{
+    --slot:#2f2f2c; --dot:rgba(255,255,255,.10); --block:rgba(255,255,255,.055);
+    --mint:rgba(25,191,167,.20); --status:#6f7877;
+    --page:#262626;
+  }
+  html,body{margin:0}
+  body{background:var(--page);font-family:Onest,system-ui,sans-serif;padding:40px;display:flex;justify-content:center}
+
+  .lk-generating{display:flex;flex-direction:column;gap:18px;width:min(100%,420px)}
+  .lk-status{display:flex;align-items:center;gap:9px;font-size:15px;color:var(--status)}
+  .lk-status i{width:4px;height:4px;border-radius:50%;background:currentColor;animation:lk-dots 1.8s ease-in-out infinite}
+  .lk-status i:nth-child(2){animation-delay:.25s}
+  .lk-status i:nth-child(3){animation-delay:.5s}
+
+  .lk-slot{position:relative;aspect-ratio:1/1;border-radius:40px;overflow:hidden;
+    background-color:var(--slot);
+    background-image:radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size:18px 18px;background-position:9px 9px}
+  .lk-grid{position:absolute;inset:0;padding:34px;box-sizing:border-box;
+    display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:14px}
+  .lk-grid > div{border-radius:20px;background:var(--block);
+    animation:lk-block 4.4s cubic-bezier(.22,1,.36,1) infinite}
+  .lk-grid > div:nth-child(1){grid-column:span 2;grid-row:span 2;border-radius:26px;background:var(--mint)}
+  .lk-grid > div:nth-child(2){animation-delay:.4s}
+  .lk-grid > div:nth-child(3){animation-delay:.8s}
+  .lk-grid > div:nth-child(4){grid-column:span 2;animation-delay:1.2s}
+  .lk-grid > div:nth-child(5){background:var(--mint);animation-delay:1.6s}
+
+  @keyframes lk-block{0%,100%{opacity:.25}45%{opacity:1}}
+  @keyframes lk-dots{0%,100%{opacity:.25}50%{opacity:.9}}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important}.lk-grid > div{opacity:.6}}
+</style>
+</head>
+<body>
+  <!-- data-theme="dark" на любом родителе переключает на тёмную тему (#262626) -->
+  <div class="lk-generating">
+    <div class="lk-status">Собираю кадр<i></i><i></i><i></i></div>
+    <div class="lk-slot">
+      <div class="lk-grid"><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+</body>
+</html>
